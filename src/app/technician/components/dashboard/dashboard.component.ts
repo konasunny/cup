@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
   overlays: any[];
   title = 'cupcake';
   markers = [];
-  ref = firebase.database().ref('geolocations2/');
+  ref = firebase.database().ref('geolocations/');
   uuid = '11cfa37d-337b-92d3-da18-c1988bbbed31'; //UUID.UUID();
   items: Observable<any[]>;
   users = [];
@@ -109,7 +109,7 @@ export class DashboardComponent implements OnInit {
     { name: 'Styled Map' });
   constructor(afDb: AngularFireDatabase, private geoLocation: GeolocationService) {
     this.deleteMarkers();
-    afDb.list<any>('geolocations2').valueChanges().subscribe(
+    afDb.list<any>('geolocations').valueChanges().subscribe(
       resp => {
         let image = 'assets/images/location-tracker.png';
         for (var data of resp) {
@@ -131,7 +131,7 @@ export class DashboardComponent implements OnInit {
     let directionsDisplay = new google.maps.DirectionsRenderer;
     let mylocation;
 
-    this.geoLocation.getCurrentLocation({ maximumAge: 5000, timeout: 500, enableHighAccuracy: true }).subscribe((resp) => {
+    this.geoLocation.getCurrentLocation({ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true }).subscribe((resp) => {
       mylocation = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
       this.initializeMap(mylocation);
       this.styledMap()
@@ -279,8 +279,8 @@ export class DashboardComponent implements OnInit {
   }
 
   updateGeolocation(uuid, lat, lng) {
-    if (localStorage.getItem('mykey2')) {
-      firebase.database().ref('geolocations2/' + localStorage.getItem('mykey2')).set({
+    if (localStorage.getItem('mykey')) {
+      firebase.database().ref('geolocations/' + localStorage.getItem('mykey')).set({
         uuid: uuid,
         latitude: lat,
         longitude: lng
@@ -292,7 +292,7 @@ export class DashboardComponent implements OnInit {
         latitude: lat,
         longitude: lng
       });
-      localStorage.setItem('mykey2', newData.key);
+      localStorage.setItem('mykey', newData.key);
     }
   }
 
