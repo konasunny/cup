@@ -1,0 +1,12 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<h1>
+  <a [routerLink]="['/end-user']">endUser</a>
+  <a [routerLink]="['/tech']">tech</a>
+  <a [routerLink]="['/admin']">admin</a>
+  Welcome to {{title}}!
+</h1>
+<button pButton type="button" label="Prime" class="ui-button-info"></button>
+<button pButton type="button" icon="fa-check" iconPos="left"></button>
+<div #map id="map" style="width:100%;height:320px"></div>
+<!-- <p-gmap [options]="options" [style]="{'width':'100%','height':'320px'}" [overlays]="overlays"></p-gmap> -->
+<router-outlet></router-outlet>
