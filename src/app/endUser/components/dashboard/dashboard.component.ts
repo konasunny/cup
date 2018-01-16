@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   title = 'cupcake';
   markers = [];
   ref = firebase.database().ref('geolocations1/');
-  uuid = '11cfa37d-337b-92d3-da18-c1988bbbed31'; //UUID.UUID();
+  uuid = '22cfa37d-337b-92d3-da18-c1988bbbed31'; //UUID.UUID();
   items: Observable<any[]>;
   users = [];
 
@@ -114,7 +114,7 @@ export class DashboardComponent implements OnInit {
           console.log('db:', data);
           let updatelocation = new google.maps.LatLng(data.latitude, data.longitude);
           this.addMarker(updatelocation, image);
-          this.setMapOnAll(this.map);
+          this.setMapOnAll(this.map, updatelocation);
         }
       }
     );
@@ -224,10 +224,10 @@ export class DashboardComponent implements OnInit {
     //this.updateGeolocation(this.uuid, data.coords.latitude, data.coords.longitude);
     let updatelocation = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
     let image = 'assets/images/location-tracker.png';
-    this.markers[0].setPosition(updatelocation);
-    //this.addMarker(updatelocation, image);
-    //this.setMapOnAll(this.map);
-    this.map.setCenter(updatelocation);
+    //this.markers[0].setPosition(updatelocation);
+    this.addMarker(updatelocation, image);
+    this.setMapOnAll(this.map, updatelocation);
+
   }
 
   onError(error: any) {
@@ -256,10 +256,12 @@ export class DashboardComponent implements OnInit {
     this.markers.push(marker);
   }
 
-  setMapOnAll(map) {
+  setMapOnAll(map, location = null) {
     for (var i = 0; i < this.markers.length; i++) {
       this.markers[i].setMap(map);
+      this.markers[i].setPosition(location)
     }
+    if(location) this.map.setCenter(location);
   }
 
   clearMarkers() {
@@ -272,8 +274,8 @@ export class DashboardComponent implements OnInit {
   }
 
   updateGeolocation(uuid, lat, lng) {
-    if (localStorage.getItem('mykey')) {
-      firebase.database().ref('geolocations1/' + localStorage.getItem('mykey')).set({
+    if (localStorage.getItem('mykey11')) {
+      firebase.database().ref('geolocations1/' + localStorage.getItem('mykey11')).set({
         uuid: uuid,
         latitude: lat,
         longitude: lng
@@ -285,7 +287,7 @@ export class DashboardComponent implements OnInit {
         latitude: lat,
         longitude: lng
       });
-      localStorage.setItem('mykey', newData.key);
+      localStorage.setItem('mykey11', newData.key);
     }
   }
 
