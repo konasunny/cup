@@ -218,6 +218,7 @@ export class AppComponent implements OnInit {
     let image = 'assets/images/location-tracker.png';
     this.addMarker(updatelocation, image);
     this.setMapOnAll(this.map);
+    this.map.setCenter(updatelocation);
   }
 
   onError(error: any) {
