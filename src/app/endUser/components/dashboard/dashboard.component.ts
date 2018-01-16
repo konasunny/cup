@@ -114,7 +114,7 @@ export class DashboardComponent implements OnInit {
           console.log('db:', data);
           let updatelocation = new google.maps.LatLng(data.latitude, data.longitude);
           this.addMarker(updatelocation, image);
-          this.setMapOnAll(this.map, updatelocation);
+          this.setMapOnAll(this.map);
         }
       }
     );
@@ -158,10 +158,10 @@ export class DashboardComponent implements OnInit {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 18,
       center: location,
-      // mapTypeControlOptions: {
-      //   mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
-      //     'styled_map']
-      // }
+      mapTypeControlOptions: {
+        mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
+          'styled_map']
+      }
     });
 
     // let lineSymbol = {
@@ -215,7 +215,7 @@ export class DashboardComponent implements OnInit {
 
   watchLocation() {
     this.geoLocation.watchLocation().subscribe((data) => {
-      this.onWatchSuccess(data)
+      this.onWatchSuccess(data);
     });
   }
 
@@ -228,7 +228,7 @@ export class DashboardComponent implements OnInit {
     this.markers[0].setPosition(updatelocation);
     this.map.setCenter(updatelocation);
    // this.addMarker(updatelocation, image);
-    //this.setMapOnAll(this.map, updatelocation);
+    //this.setMapOnAll(this.map);
 
   }
 
@@ -258,12 +258,12 @@ export class DashboardComponent implements OnInit {
     this.markers.push(marker);
   }
 
-  setMapOnAll(map, location = null) {
+  setMapOnAll(map) {
     for (var i = 0; i < this.markers.length; i++) {
       this.markers[i].setMap(map);
-      this.markers[i].setPosition(location)
+      //this.markers[i].setPosition(location)
     }
-    if(location) this.map.setCenter(location);
+    //if(location) this.map.setCenter(location);
   }
 
   clearMarkers() {
