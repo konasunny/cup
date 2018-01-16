@@ -225,8 +225,10 @@ export class DashboardComponent implements OnInit {
     let updatelocation = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
     let image = 'assets/images/location-tracker.png';
     //this.markers[0].setPosition(updatelocation);
-    this.addMarker(updatelocation, image);
-    this.setMapOnAll(this.map, updatelocation);
+    this.markers[0].setPosition(updatelocation);
+    this.map.setCenter(updatelocation);
+   // this.addMarker(updatelocation, image);
+    //this.setMapOnAll(this.map, updatelocation);
 
   }
 
