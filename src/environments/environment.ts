@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   firebase: {
     apiKey: 'AIzaSyD5uzBgWv1ofOuruA6PmoT80rnLnatJHPg',
-    authDomain: 'http://localhost/cupcake/',
+    authDomain: 'https://epic-neumann-602311.netlify.com/',
     databaseURL: 'https://cupcake-geolocaltion.firebaseio.com/',
     projectId: 'cupcake-geolocaltion',
     storageBucket: 'gs://cupcake-geolocaltion.appspot.com/'
