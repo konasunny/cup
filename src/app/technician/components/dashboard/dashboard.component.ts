@@ -109,17 +109,17 @@ export class DashboardComponent implements OnInit {
     { name: 'Styled Map' });
   constructor(afDb: AngularFireDatabase, private geoLocation: GeolocationService) {
     this.deleteMarkers();
-    afDb.list<any>('geolocations').valueChanges().subscribe(
-      resp => {
-        let image = 'assets/images/location-tracker.png';
-        for (var data of resp) {
-          console.log('db:', data);
-          let updatelocation = new google.maps.LatLng(data.latitude, data.longitude);
-          this.addMarker(updatelocation, image);
-          this.setMapOnAll(this.map);
-        }
-      }
-    );
+    // afDb.list<any>('geolocations').valueChanges().subscribe(
+    //   resp => {
+    //     let image = 'assets/images/location-tracker.png';
+    //     for (var data of resp) {
+    //       console.log('db:', data);
+    //       let updatelocation = new google.maps.LatLng(data.latitude, data.longitude);
+    //       this.addMarker(updatelocation, image);
+    //       this.setMapOnAll(this.map);
+    //     }
+    //   }
+    // );
   }
 
   ngOnInit(): void {
@@ -133,9 +133,12 @@ export class DashboardComponent implements OnInit {
 
     this.geoLocation.getCurrentLocation({ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true }).subscribe((resp) => {
       mylocation = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+      let image = 'assets/images/location-tracker.png';
+
       this.initializeMap(mylocation);
       this.styledMap()
-
+      this.addMarker(mylocation, image);
+      this.setMapOnAll(this.map);
       directionsDisplay.setMap(this.map);
       this.calculateAndDisplayRoute(directionsService, directionsDisplay, mylocation);
       this.watchLocation();
@@ -226,7 +229,7 @@ export class DashboardComponent implements OnInit {
     //this.updateGeolocation(this.uuid, data.coords.latitude, data.coords.longitude);
     let updatelocation = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
     let image = 'assets/images/location-tracker.png';
-    this.markers[0].setDuration(1);
+    this.markers[0].setDuration(1000);
       this.markers[0].setEasing('linear');
     this.markers[0].setPosition(updatelocation);
     //this.addMarker(updatelocation, image);
@@ -255,6 +258,7 @@ export class DashboardComponent implements OnInit {
     var marker = new SlidingMarker({
       position: location,
       map: this.map,
+      title: 'i am title',
       icon: image
     });
     // let marker = new google.maps.Marker({
