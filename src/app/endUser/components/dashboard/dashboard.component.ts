@@ -239,7 +239,7 @@ export class DashboardComponent implements OnInit {
       let bounds = new google.maps.LatLngBounds();
       bounds.extend(updatelocation);
       this.map.fitBounds(bounds);
-    //this.markers[0].setPosition(updatelocation);
+    this.markers[0].setPosition(updatelocation);
 
     //this.map.setCenter(updatelocation);
   }
