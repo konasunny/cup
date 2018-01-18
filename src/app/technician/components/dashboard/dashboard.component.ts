@@ -242,9 +242,9 @@ destLocation = 'pragathi nagar';
     let image = 'assets/images/location-tracker.png';
     this.markers[0].setDuration(1000);
       this.markers[0].setEasing('linear');
-      let bounds = new google.maps.LatLngBounds();
-      bounds.extend(updatelocation);
-      this.map.fitBounds(bounds);
+      // let bounds = new google.maps.LatLngBounds();
+      // bounds.extend(updatelocation);
+      // this.map.fitBounds(bounds);
       this.markers[0].setPosition(updatelocation);
 
     //this.map.setCenter(updatelocation);
