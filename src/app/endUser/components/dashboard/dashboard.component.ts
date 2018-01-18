@@ -27,7 +27,8 @@ export class DashboardComponent implements OnInit {
   uuid = '11cfa37d-337b-92d3-da18-c1988bbbed31'; //UUID.UUID();
   items: Observable<any[]>;
   users = [];
-
+  cords: string; // just for logging
+destLocation = 'pragathi nagar';
 
   // empty out previous values
     startLocation = [];
@@ -131,7 +132,7 @@ export class DashboardComponent implements OnInit {
     let directionsDisplay = new google.maps.DirectionsRenderer;
     let mylocation;
 
-    this.geoLocation.getCurrentLocation({ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true }).subscribe((resp) => {
+    this.geoLocation.getCurrentLocation({ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true,  frequency: 1000 }).subscribe((resp) => {
       mylocation = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
       let image = 'assets/images/location-tracker.png';
 
@@ -148,7 +149,7 @@ export class DashboardComponent implements OnInit {
   calculateAndDisplayRoute(directionsService, directionsDisplay, mylocation) {
     directionsService.route({
       origin: mylocation,
-      destination: 'inorbit mall, hyderabad',
+      destination: this.destLocation,
       travelMode: 'DRIVING'
     }, function (response, status) {
       if (status === 'OK') {
@@ -233,13 +234,14 @@ export class DashboardComponent implements OnInit {
     //this.deleteMarkers();
     //this.updateGeolocation(this.uuid, data.coords.latitude, data.coords.longitude);
     let updatelocation = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
+    this.cords = data.coords.latitude + ',' + data.coords.longitude;
     let image = 'assets/images/location-tracker.png';
     this.markers[0].setDuration(1000);
       this.markers[0].setEasing('linear');
       let bounds = new google.maps.LatLngBounds();
       bounds.extend(updatelocation);
       this.map.fitBounds(bounds);
-    this.markers[0].setPosition(updatelocation);
+      this.markers[0].setPosition(updatelocation);
 
     //this.map.setCenter(updatelocation);
   }
@@ -266,7 +268,11 @@ export class DashboardComponent implements OnInit {
       position: location,
       map: this.map,
       title: 'i am title',
-      icon: image
+      //icon: image,
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 5,
+      }
     });
     // let marker = new google.maps.Marker({
     //   position: location,
