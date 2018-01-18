@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
   uuid = '11cfa37d-337b-92d3-da18-c1988bbbed31'; //UUID.UUID();
   items: Observable<any[]>;
   users = [];
+  estimatedTravelTime = 'checking...';
   cords: string; // just for logging
 destLocation = 'pragathi nagar';
 
@@ -153,9 +154,10 @@ destLocation = 'pragathi nagar';
       travelMode: 'DRIVING'
     }, function (response, status) {
       if (status === 'OK') {
+        this.estimatedTravelTime = response.routes[0].legs[0].duration.text
         directionsDisplay.setDirections(response);
         // to get duraiton
-        // response.routes[0].legs[0].duration.text
+
 
         //to get distance
         // response.routes[0].legs[0].durdistanceation.text
@@ -268,11 +270,11 @@ destLocation = 'pragathi nagar';
       position: location,
       map: this.map,
       title: 'i am title',
-      //icon: image,
-      icon: {
-        path: google.maps.SymbolPath.CIRCLE,
-        scale: 5,
-      }
+      icon: image,
+      // icon: {
+      //   path: google.maps.SymbolPath.CIRCLE,
+      //   scale: 5,
+      // }
     });
     // let marker = new google.maps.Marker({
     //   position: location,
