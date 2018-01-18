@@ -166,7 +166,7 @@ export class DashboardComponent implements OnInit {
 
   initializeMap(location) {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      zoom: 18,
+      zoom: 12,
       center: location,
       // mapTypeControlOptions: {
       //   mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
