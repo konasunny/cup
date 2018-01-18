@@ -152,19 +152,21 @@ destLocation = 'pragathi nagar';
       origin: mylocation,
       destination: this.destLocation,
       travelMode: 'DRIVING'
-    }, function (response, status) {
-      if (status === 'OK') {
-        this.estimatedTravelTime = response.routes[0].legs[0].duration.text
-        directionsDisplay.setDirections(response);
-        // to get duraiton
+    }, this.onDirectionSuccess.bind(this, directionsDisplay));
+  }
+
+  onDirectionSuccess(directionsDisplay, response, status) {
+    if (status === 'OK') {
+      this.estimatedTravelTime = response.routes[0].legs[0].duration.text
+      directionsDisplay.setDirections(response);
+      // to get duraiton
 
 
-        //to get distance
-        // response.routes[0].legs[0].durdistanceation.text
-      } else {
-        window.alert('Directions request failed due to ' + status);
-      }
-    });
+      //to get distance
+      // response.routes[0].legs[0].durdistanceation.text
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    }
   }
 
   initializeMap(location) {
