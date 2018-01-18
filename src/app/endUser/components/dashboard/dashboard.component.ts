@@ -163,7 +163,7 @@ destLocation = 'pragathi nagar';
 
 
       //to get distance
-      // response.routes[0].legs[0].durdistanceation.text
+      // response.routes[0].legs[0].distance.text
     } else {
       window.alert('Directions request failed due to ' + status);
     }
