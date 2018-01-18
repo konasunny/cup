@@ -6,8 +6,10 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireList  } from 'angularfire2/database';
 import { GeolocationService } from '../../../shared/services/geo-location.service';
-
+/// <reference path="./marker-animate-unobtrusive.d.ts" />
 declare var google: any;
+declare var SlidingMarker: any;
+//import * as SlidingMarker from 'marker-animate-unobtrusive';
 
 @Component({
   selector: 'cupcake-dashboard',
@@ -21,8 +23,8 @@ export class DashboardComponent implements OnInit {
   overlays: any[];
   title = 'cupcake';
   markers = [];
-  ref = firebase.database().ref('geolocations1/');
-  uuid = '22cfa37d-337b-92d3-da18-c1988bbbed31'; //UUID.UUID();
+  ref = firebase.database().ref('geolocations/');
+  uuid = '11cfa37d-337b-92d3-da18-c1988bbbed31'; //UUID.UUID();
   items: Observable<any[]>;
   users = [];
 
@@ -107,17 +109,17 @@ export class DashboardComponent implements OnInit {
     { name: 'Styled Map' });
   constructor(afDb: AngularFireDatabase, private geoLocation: GeolocationService) {
     this.deleteMarkers();
-    afDb.list<any>('geolocations1').valueChanges().subscribe(
-      resp => {
-        let image = 'assets/images/location-tracker.png';
-        for (var data of resp) {
-          console.log('db:', data);
-          let updatelocation = new google.maps.LatLng(data.latitude, data.longitude);
-          this.addMarker(updatelocation, image);
-          this.setMapOnAll(this.map);
-        }
-      }
-    );
+    // afDb.list<any>('geolocations').valueChanges().subscribe(
+    //   resp => {
+    //     let image = 'assets/images/location-tracker.png';
+    //     for (var data of resp) {
+    //       console.log('db:', data);
+    //       let updatelocation = new google.maps.LatLng(data.latitude, data.longitude);
+    //       this.addMarker(updatelocation, image);
+    //       this.setMapOnAll(this.map);
+    //     }
+    //   }
+    // );
   }
 
   ngOnInit(): void {
@@ -129,11 +131,14 @@ export class DashboardComponent implements OnInit {
     let directionsDisplay = new google.maps.DirectionsRenderer;
     let mylocation;
 
-    this.geoLocation.getCurrentLocation({ maximumAge: 5000, timeout: 500, enableHighAccuracy: true }).subscribe((resp) => {
+    this.geoLocation.getCurrentLocation({ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true }).subscribe((resp) => {
       mylocation = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+      let image = 'assets/images/location-tracker.png';
+
       this.initializeMap(mylocation);
       this.styledMap()
-
+      this.addMarker(mylocation, image);
+      this.setMapOnAll(this.map);
       directionsDisplay.setMap(this.map);
       this.calculateAndDisplayRoute(directionsService, directionsDisplay, mylocation);
       this.watchLocation();
@@ -148,6 +153,11 @@ export class DashboardComponent implements OnInit {
     }, function (response, status) {
       if (status === 'OK') {
         directionsDisplay.setDirections(response);
+        // to get duraiton
+        // response.routes[0].legs[0].duration.text
+
+        //to get distance
+        // response.routes[0].legs[0].durdistanceation.text
       } else {
         window.alert('Directions request failed due to ' + status);
       }
@@ -158,10 +168,10 @@ export class DashboardComponent implements OnInit {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 18,
       center: location,
-      mapTypeControlOptions: {
-        mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
-          'styled_map']
-      }
+      // mapTypeControlOptions: {
+      //   mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
+      //     'styled_map']
+      // }
     });
 
     // let lineSymbol = {
@@ -215,7 +225,7 @@ export class DashboardComponent implements OnInit {
 
   watchLocation() {
     this.geoLocation.watchLocation().subscribe((data) => {
-      this.onWatchSuccess(data);
+      this.onWatchSuccess(data)
     });
   }
 
@@ -224,12 +234,14 @@ export class DashboardComponent implements OnInit {
     //this.updateGeolocation(this.uuid, data.coords.latitude, data.coords.longitude);
     let updatelocation = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
     let image = 'assets/images/location-tracker.png';
+    this.markers[0].setDuration(1000);
+      this.markers[0].setEasing('linear');
+      let bounds = new google.maps.LatLngBounds();
+      bounds.extend(updatelocation);
+      this.map.fitBounds(bounds);
     //this.markers[0].setPosition(updatelocation);
-    this.markers[0].setPosition(updatelocation);
-    this.map.setCenter(updatelocation);
-   // this.addMarker(updatelocation, image);
-    //this.setMapOnAll(this.map);
 
+    //this.map.setCenter(updatelocation);
   }
 
   onError(error: any) {
@@ -250,20 +262,24 @@ export class DashboardComponent implements OnInit {
   }
 
   addMarker(location, image) {
-    let marker = new google.maps.Marker({
+    var marker = new SlidingMarker({
       position: location,
       map: this.map,
+      title: 'i am title',
       icon: image
     });
+    // let marker = new google.maps.Marker({
+    //   position: location,
+    //   map: this.map,
+    //   icon: image
+    // });
     this.markers.push(marker);
   }
 
   setMapOnAll(map) {
     for (var i = 0; i < this.markers.length; i++) {
       this.markers[i].setMap(map);
-      //this.markers[i].setPosition(location)
     }
-    //if(location) this.map.setCenter(location);
   }
 
   clearMarkers() {
@@ -276,8 +292,8 @@ export class DashboardComponent implements OnInit {
   }
 
   updateGeolocation(uuid, lat, lng) {
-    if (localStorage.getItem('mykey11')) {
-      firebase.database().ref('geolocations1/' + localStorage.getItem('mykey11')).set({
+    if (localStorage.getItem('mykey')) {
+      firebase.database().ref('geolocations/' + localStorage.getItem('mykey')).set({
         uuid: uuid,
         latitude: lat,
         longitude: lng
@@ -289,7 +305,7 @@ export class DashboardComponent implements OnInit {
         latitude: lat,
         longitude: lng
       });
-      localStorage.setItem('mykey11', newData.key);
+      localStorage.setItem('mykey', newData.key);
     }
   }
 

@@ -153,6 +153,11 @@ export class DashboardComponent implements OnInit {
     }, function (response, status) {
       if (status === 'OK') {
         directionsDisplay.setDirections(response);
+        // to get duraiton
+        // response.routes[0].legs[0].duration.text
+
+        //to get distance
+        // response.routes[0].legs[0].durdistanceation.text
       } else {
         window.alert('Directions request failed due to ' + status);
       }
