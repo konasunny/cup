@@ -172,7 +172,27 @@ destLocation = 'pragathi nagar';
       this.estimatedTravelTime = response.routes[0].legs[0].duration.text
       directionsDisplay.setDirections(response);
       // to get duraiton
+      var polyline = new google.maps.Polyline({
+        path: [],
+        strokeColor: '#0000FF',
+        strokeWeight: 3
+      });
+      var bounds = new google.maps.LatLngBounds();
 
+
+      var legs = response.routes[0].legs;
+      for (let i = 0; i < legs.length; i++) {
+        var steps = legs[i].steps;
+        for (let j = 0; j < steps.length; j++) {
+          var nextSegment = steps[j].path;
+          for (let k = 0; k < nextSegment.length; k++) {
+            polyline.getPath().push(nextSegment[k]);
+            bounds.extend(nextSegment[k]);
+          }
+        }
+      }
+
+      polyline.setMap(this.map);
 
       //to get distance
       // response.routes[0].legs[0].distance.text
@@ -250,8 +270,14 @@ destLocation = 'pragathi nagar';
   onWatchSuccess(data) {
     //this.deleteMarkers();
     //this.updateGeolocation(this.uuid, data.coords.latitude, data.coords.longitude);
-    alert(data.coords.heading);
+
+
+
     let updatelocation = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
+
+    var lastPosn = this.markers[0].getPosition();
+    var heading = google.maps.geometry.spherical.computeHeading(lastPosn, updatelocation);
+
     this.cords = data.coords.latitude + ',' + data.coords.longitude;
     let image = 'assets/images/location-tracker.png';
     this.markers[0].setDuration(3000);

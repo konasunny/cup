@@ -140,8 +140,8 @@ destLocation = 'pragathi nagar';
       this.initializeMap(mylocation);
       this.styledMap()
       this.addMarker(mylocation, image);
-      this.setMapOnAll(this.map);
-      directionsDisplay.setMap(this.map);
+      //this.setMapOnAll(this.map);
+      //directionsDisplay.setMap(this.map);
       this.calculateAndDisplayRoute(directionsService, directionsDisplay, mylocation);
       this.watchLocation();
     });
@@ -159,7 +159,28 @@ destLocation = 'pragathi nagar';
     if (status === 'OK') {
       this.estimatedTravelTime = response.routes[0].legs[0].duration.text
       directionsDisplay.setDirections(response);
-      // to get duraiton
+
+      var polyline = new google.maps.Polyline({
+        path: [],
+        strokeColor: '#0000FF',
+        strokeWeight: 3
+      });
+      var bounds = new google.maps.LatLngBounds();
+
+
+      var legs = response.routes[0].legs;
+      for (let i = 0; i < legs.length; i++) {
+        var steps = legs[i].steps;
+        for (let j = 0; j < steps.length; j++) {
+          var nextSegment = steps[j].path;
+          for (let k = 0; k < nextSegment.length; k++) {
+            polyline.getPath().push(nextSegment[k]);
+            bounds.extend(nextSegment[k]);
+          }
+        }
+      }
+
+      polyline.setMap(this.map);
 
 
       //to get distance
@@ -171,6 +192,7 @@ destLocation = 'pragathi nagar';
 
   initializeMap(location) {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
+      mapTypeId: google.maps.MapTypeId.ROADMAP
       // zoom: 12,
       // center: location,
       // mapTypeControlOptions: {
@@ -240,13 +262,13 @@ destLocation = 'pragathi nagar';
     let updatelocation = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
     this.cords = data.coords.latitude + ',' + data.coords.longitude;
     let image = 'assets/images/location-tracker.png';
-    this.fitToMarkers(this.map, this.markers, 12, updatelocation);
-    // this.markers[0].setDuration(1000);
-    //   this.markers[0].setEasing('linear');
-    //   let bounds = new google.maps.LatLngBounds();
-    //   bounds.extend(updatelocation);
-    //   this.map.fitBounds(bounds);
-    //   this.markers[0].setPosition(updatelocation);
+    //this.fitToMarkers(this.map, this.markers, 12, updatelocation);
+    this.markers[0].setDuration(1000);
+      this.markers[0].setEasing('linear');
+      let bounds = new google.maps.LatLngBounds();
+      bounds.extend(updatelocation);
+      this.map.fitBounds(bounds);
+      this.markers[0].setPosition(updatelocation);
 
     //this.map.setCenter(updatelocation);
   }
