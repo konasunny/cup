@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
   users = [];
   estimatedTravelTime = 'checking...';
   cords: string; // just for logging
-  heading;
+  heading: any;
 destLocation = 'pragathi nagar';
 
   // empty out previous values
@@ -149,16 +149,16 @@ destLocation = 'pragathi nagar';
     this.geoLocation.getCurrentLocation({ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true,  frequency: 3000 }).subscribe((resp) => {
       mylocation = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
       let image = this.icon; //'assets/images/location-tracker.png';
-      this.heading = google.maps.geometry.spherical.computeHeading(mylocation, mylocation);
-
-    this.icon.rotation = this.heading;
       this.initializeMap(mylocation);
-      this.styledMap()
+      this.styledMap();
       this.addMarker(mylocation, image);
       this.setMapOnAll(this.map);
       directionsDisplay.setMap(this.map);
       this.calculateAndDisplayRoute(directionsService, directionsDisplay, mylocation);
       this.watchLocation();
+      // this.heading = google.maps.geometry.spherical.computeHeading(mylocation, mylocation);
+      // console.log(this.heading);
+      // this.icon.rotation = this.heading;
     });
   }
 

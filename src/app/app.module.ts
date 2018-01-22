@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { ButtonModule } from 'primeng/primeng';
 import { GMapModule } from 'primeng/primeng';
@@ -22,6 +23,7 @@ import { environment } from '../environments/environment';
     SharedModule,
     AppRoutingModule,
     ButtonModule,
+    FormsModule,
     GMapModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
