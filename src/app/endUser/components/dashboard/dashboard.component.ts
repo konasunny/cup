@@ -171,8 +171,8 @@ destLocation = 'pragathi nagar';
 
   initializeMap(location) {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      zoom: 12,
-      center: location,
+      // zoom: 12,
+      // center: location,
       // mapTypeControlOptions: {
       //   mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
       //     'styled_map']
