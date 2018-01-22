@@ -133,7 +133,7 @@ destLocation = 'pragathi nagar';
     let directionsDisplay = new google.maps.DirectionsRenderer;
     let mylocation;
 
-    this.geoLocation.getCurrentLocation({ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true,  frequency: 1000 }).subscribe((resp) => {
+    this.geoLocation.getCurrentLocation({ maximumAge: 3000, timeout: 50000, enableHighAccuracy: true }).subscribe((resp) => {
       mylocation = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
       let image = 'assets/images/location-tracker.png';
 

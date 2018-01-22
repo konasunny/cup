@@ -247,6 +247,7 @@ destLocation = 'pragathi nagar';
       // bounds.extend(updatelocation);
       // this.map.fitBounds(bounds);
       this.markers[0].setPosition(updatelocation);
+      this.map.panTo(updatelocation);
 
     //this.map.setCenter(updatelocation);
   }
