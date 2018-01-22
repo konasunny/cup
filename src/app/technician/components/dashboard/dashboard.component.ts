@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
   users = [];
   estimatedTravelTime = 'checking...';
   cords: string; // just for logging
+  heading;
 destLocation = 'pragathi nagar';
 
   // empty out previous values
@@ -45,7 +46,7 @@ destLocation = 'pragathi nagar';
     fillOpacity: 1,
     fillColor: '#404040',
     offset: '5%',
-    rotation: 90, //parseInt(heading[i]),
+    rotation: 45, //parseInt(heading[i]),
     anchor: new google.maps.Point(10, 25) // orig 10,50 back of car, 10,0 front of car, 10,25 center of car
 };
   styledMapType = new google.maps.StyledMapType(
@@ -148,8 +149,9 @@ destLocation = 'pragathi nagar';
     this.geoLocation.getCurrentLocation({ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true,  frequency: 3000 }).subscribe((resp) => {
       mylocation = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
       let image = this.icon; //'assets/images/location-tracker.png';
-      var heading = google.maps.geometry.spherical.computeHeading(mylocation, mylocation);
-    this.icon.rotation = heading;
+      this.heading = google.maps.geometry.spherical.computeHeading(mylocation, mylocation);
+
+    this.icon.rotation = this.heading;
       this.initializeMap(mylocation);
       this.styledMap()
       this.addMarker(mylocation, image);
