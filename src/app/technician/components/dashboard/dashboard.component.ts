@@ -45,7 +45,7 @@ destLocation = 'pragathi nagar';
     fillOpacity: 1,
     fillColor: '#404040',
     offset: '5%',
-    // rotation: parseInt(heading[i]),
+    rotation: 90, //parseInt(heading[i]),
     anchor: new google.maps.Point(10, 25) // orig 10,50 back of car, 10,0 front of car, 10,25 center of car
 };
   styledMapType = new google.maps.StyledMapType(
@@ -148,7 +148,8 @@ destLocation = 'pragathi nagar';
     this.geoLocation.getCurrentLocation({ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true,  frequency: 3000 }).subscribe((resp) => {
       mylocation = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
       let image = this.icon; //'assets/images/location-tracker.png';
-
+      var heading = google.maps.geometry.spherical.computeHeading(mylocation, mylocation);
+    this.icon.rotation = heading;
       this.initializeMap(mylocation);
       this.styledMap()
       this.addMarker(mylocation, image);
@@ -277,7 +278,8 @@ destLocation = 'pragathi nagar';
 
     var lastPosn = this.markers[0].getPosition();
     var heading = google.maps.geometry.spherical.computeHeading(lastPosn, updatelocation);
-
+    this.icon.rotation = heading;
+    this.markers[0].setIcon(this.icon);
     this.cords = data.coords.latitude + ',' + data.coords.longitude;
     let image = 'assets/images/location-tracker.png';
     this.markers[0].setDuration(3000);
@@ -285,7 +287,9 @@ destLocation = 'pragathi nagar';
       // let bounds = new google.maps.LatLngBounds();
       // bounds.extend(updatelocation);
       // this.map.fitBounds(bounds);
+
       this.markers[0].setPosition(updatelocation);
+
       this.map.panTo(updatelocation);
 
     //this.map.setCenter(updatelocation);
