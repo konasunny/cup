@@ -133,7 +133,7 @@ destLocation = 'pragathi nagar';
     let directionsDisplay = new google.maps.DirectionsRenderer;
     let mylocation;
 
-    this.geoLocation.getCurrentLocation({ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true,  frequency: 1000 }).subscribe((resp) => {
+    this.geoLocation.getCurrentLocation({ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true,  frequency: 3000 }).subscribe((resp) => {
       mylocation = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
       let image = 'assets/images/location-tracker.png';
 
@@ -237,10 +237,11 @@ destLocation = 'pragathi nagar';
   onWatchSuccess(data) {
     //this.deleteMarkers();
     //this.updateGeolocation(this.uuid, data.coords.latitude, data.coords.longitude);
+    alert(data.coords.heading);
     let updatelocation = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
     this.cords = data.coords.latitude + ',' + data.coords.longitude;
     let image = 'assets/images/location-tracker.png';
-    this.markers[0].setDuration(1000);
+    this.markers[0].setDuration(3000);
       this.markers[0].setEasing('linear');
       // let bounds = new google.maps.LatLngBounds();
       // bounds.extend(updatelocation);
