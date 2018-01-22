@@ -240,15 +240,38 @@ destLocation = 'pragathi nagar';
     let updatelocation = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
     this.cords = data.coords.latitude + ',' + data.coords.longitude;
     let image = 'assets/images/location-tracker.png';
-    this.markers[0].setDuration(1000);
-      this.markers[0].setEasing('linear');
-      let bounds = new google.maps.LatLngBounds();
-      bounds.extend(updatelocation);
-      this.map.fitBounds(bounds);
-      this.markers[0].setPosition(updatelocation);
+    this.fitToMarkers(this.map, this.markers, 12, updatelocation);
+    // this.markers[0].setDuration(1000);
+    //   this.markers[0].setEasing('linear');
+    //   let bounds = new google.maps.LatLngBounds();
+    //   bounds.extend(updatelocation);
+    //   this.map.fitBounds(bounds);
+    //   this.markers[0].setPosition(updatelocation);
 
     //this.map.setCenter(updatelocation);
   }
+
+  fitToMarkers (map, markers, maxZoom, updatelocation) {
+    this.markers[0].setDuration(1000);
+      this.markers[0].setEasing('linear');
+    if (typeof maxZoom == 'undefined') maxZoom = 15;
+
+    google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
+        if (this.getZoom() > maxZoom) {
+            this.setZoom(maxZoom);
+        }
+    });
+
+    var bounds = new google.maps.LatLngBounds();
+    for (var m = 0; m < markers.length; m++) {
+        var marker = markers[m];
+        markers[0].setPosition(updatelocation);
+        var latlng = marker.getPosition();
+        bounds.extend(latlng);
+    }
+
+    map.fitBounds(bounds);
+};
 
   onError(error: any) {
     switch (error.code) {
