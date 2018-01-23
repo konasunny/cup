@@ -9,7 +9,7 @@
 <p>Time required to travel: {{estimatedTravelTime}}</p>
 enter the destination:
 <input type="text" name="dest" id="dest" [(ngModel)]="destLocation" />
-<button type="submit" v (click)="initMap()">Show Route</button>
+<button type="submit" (click)="initMap()">Show Route</button>
 <div #map id="map" style="width:100%;height:500px"></div>
 
 <!-- <p-gmap [options]="options" [style]="{'width':'100%','height':'320px'}" [overlays]="overlays"></p-gmap> -->
