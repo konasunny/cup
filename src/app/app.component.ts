@@ -385,6 +385,8 @@ export class AppComponent {
     const image = 'assets/images/location-tracker.png';
     this.markers[0].setDuration(2000);
     this.markers[0].setEasing('linear');
+    this.map.setHeading(heading);
+    this.map.setTilt(heading);
     // let bounds = new google.maps.LatLngBounds();
     // bounds.extend(updatelocation);
     // this.map.fitBounds(bounds);
