@@ -58,6 +58,7 @@ export class AppComponent {
     rotation: 45, // parseInt(heading[i]),
     anchor: new google.maps.Point(10, 25) // orig 10,50 back of car, 10,0 front of car, 10,25 center of car
   };
+
   styledMapType = new google.maps.StyledMapType(
     [
       {
@@ -131,7 +132,8 @@ export class AppComponent {
       }
     ],
     { name: 'Styled Map' });
-  constructor(afDb: AngularFireDatabase, private geoLocation: GeolocationService) {
+
+    constructor(afDb: AngularFireDatabase, private geoLocation: GeolocationService) {
     // this.deleteMarkers();
     // afDb.list<any>('geolocations').valueChanges().subscribe(
     //   resp => {
@@ -151,7 +153,7 @@ export class AppComponent {
   }
 
   initMap() {
-    this.deleteMarkers();
+    //this.deleteMarkers();
     let mylocation;
 
     this.geoLocation.getCurrentLocation({
@@ -192,9 +194,9 @@ export class AppComponent {
     directionsService.route({
       origin: mylocation,
       destination: this.destLocation,
-      waypoints: wayPts,
-      travelMode: 'DRIVING',
-      provideRouteAlternatives: true,
+      // waypoints: wayPts,
+      travelMode: google.maps.TravelMode.DRIVING,
+      //provideRouteAlternatives: true,
       drivingOptions: { // will work with premium licence
         departureTime: new Date(Date.now()),  // for the time N milliseconds from now.
         trafficModel: 'optimistic'
@@ -235,7 +237,7 @@ export class AppComponent {
       destination: this.destLocation,
       waypoints: wayPts,
       travelMode: 'DRIVING',
-      provideRouteAlternatives: true,
+      //provideRouteAlternatives: true,
       drivingOptions: { // will work with premium licence
         departureTime: new Date(Date.now()),  // for the time N milliseconds from now.
         trafficModel: 'optimistic'
@@ -335,6 +337,7 @@ export class AppComponent {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 12,
       center: location,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
       // mapTypeControlOptions: {
       //   mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
       //     'styled_map']
@@ -354,13 +357,13 @@ export class AppComponent {
   watchLocation() {
     this.geoLocation.watchLocation().subscribe((data) => {
       const updatelocation = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
-      if (google.maps.geometry.poly.isLocationOnEdge(updatelocation, this.polyline[0], 0.0001)) {
+      //if (google.maps.geometry.poly.isLocationOnEdge(updatelocation, this.polyline[0], 0.0001)) {
         console.log("in line");
         this.onWatchSuccess(data);
-      } else {
-        this.wayPointLocation = updatelocation;
-        this.reRoute();
-      }
+      //} else {
+      //  this.wayPointLocation = updatelocation;
+        //this.reRoute();
+     // }
     });
   }
 
@@ -372,7 +375,10 @@ export class AppComponent {
 
 
     const lastPosn = this.markers[0].getPosition();
+    console.log('lastPos', lastPosn.lat() + ',' + lastPosn.lng() );
+    console.log('uptdPos', updatelocation.lat() + ',' + updatelocation.lng());
     const heading = google.maps.geometry.spherical.computeHeading(lastPosn, updatelocation);
+    console.log(heading);
     this.icon.rotation = heading;
     this.markers[0].setIcon(this.icon);
     this.cords = data.coords.latitude + ',' + data.coords.longitude;
@@ -461,6 +467,7 @@ export class AppComponent {
       localStorage.setItem('mykey', newData.key);
     }
   }
+
 
 //   @ViewChild('map') mapElement: ElementRef;
 //   destLocation = 'Inorbit mall, hyderabad';

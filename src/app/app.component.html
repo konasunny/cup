@@ -7,6 +7,7 @@
 </h1>
 <p>lat and lng :  {{cords}}</p>
 <p>Time required to travel: {{estimatedTravelTime}}</p>
+<p>Bearing: {{icon.rotation}}</p>
 enter the destination:
 <input type="text" name="dest" id="dest" [(ngModel)]="destLocation" />
 <button type="submit" (click)="initMap()">Show Route</button>
