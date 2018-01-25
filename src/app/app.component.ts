@@ -337,7 +337,8 @@ export class AppComponent {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 12,
       center: location,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      tilt: 45
       // mapTypeControlOptions: {
       //   mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
       //     'styled_map']
@@ -382,11 +383,11 @@ export class AppComponent {
     this.icon.rotation = heading;
     this.markers[0].setIcon(this.icon);
     this.cords = data.coords.latitude + ',' + data.coords.longitude;
-    const image = 'assets/images/location-tracker.png';
+   // const image = 'assets/images/location-tracker.png';
     this.markers[0].setDuration(2000);
     this.markers[0].setEasing('linear');
-    this.map.setHeading(heading);
-    this.map.setTilt(heading);
+    this.map.setHeading(heading + 90);
+    //this.map.setTilt(45);
     // let bounds = new google.maps.LatLngBounds();
     // bounds.extend(updatelocation);
     // this.map.fitBounds(bounds);
