@@ -335,10 +335,11 @@ export class AppComponent {
 
   initializeMap(location) {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      zoom: 12,
+      zoom: 15,
       center: location,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
-      tilt: 45
+      tilt: 45,
+      rotateControl: true
       // mapTypeControlOptions: {
       //   mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
       //     'styled_map']
