@@ -267,7 +267,11 @@ export class AppComponent {
           this.estimatedTravelTime = route.legs[0].duration.text;
           let travelTime = this.estimatedTravelTime;
 
-          //directionsDisplay.setDirections(response);
+          directionsDisplay.setDirections(response);
+
+          google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
+            alert('sdfs')
+          })
 
           // if (this.polyline) {
           //   this.polyline.setMap(null);
