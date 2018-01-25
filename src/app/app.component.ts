@@ -388,6 +388,8 @@ export class AppComponent {
     this.markers[0].setDuration(2000);
     this.markers[0].setEasing('linear');
     this.map.setHeading(heading + 90);
+    this.map.setTilt(45);
+    console.log('tilt', this.map.getTilt());
     //this.map.setTilt(45);
     // let bounds = new google.maps.LatLngBounds();
     // bounds.extend(updatelocation);
