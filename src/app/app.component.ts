@@ -247,6 +247,9 @@ export class AppComponent {
 
   onDirectionSuccess(directionsDisplay, response, status) {
     let infowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
+      alert('sdfs')
+    })
     if (status === 'OK') {
       let color = '#0000FF';
       response.routes.forEach((route, index) => {
@@ -269,9 +272,7 @@ export class AppComponent {
 
           directionsDisplay.setDirections(response);
 
-          google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
-            alert('sdfs')
-          })
+
 
           // if (this.polyline) {
           //   this.polyline.setMap(null);
@@ -304,22 +305,13 @@ export class AppComponent {
               infowindow.setPosition(event.latLng);
               infowindow.open(this.map);
               poly.setOptions({ strokeColor: 'black' });
-            };
-          })(this.polyline[index], this.map));
 
-
-          google.maps.event.addListener(this.map, 'click', (function (poly, map) {
-            // poly.strokeColor = '#0000FF';
-            // poly.setMap(map);
-
-            return function (event) {
               if (google.maps.geometry.poly.isLocationOnEdge(event.latLng, poly, 0.0001)) {
-
+                alert('in side');
               }
+
             };
           })(this.polyline[index], this.map));
-
-
 
           // const startLoc = route.legs["0"].start_location;
           // const endLoc = route.legs["0"].end_location;
