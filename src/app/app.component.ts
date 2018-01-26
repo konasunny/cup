@@ -9,6 +9,7 @@ import { GeolocationService } from './shared/services/geo-location.service';
 /// <reference path="./marker-animate-unobtrusive.d.ts" />
 declare var google: any;
 declare var SlidingMarker: any;
+
 @Component({
   selector: 'cupcake-root',
   templateUrl: './app.component.html',
@@ -33,6 +34,7 @@ export class AppComponent {
   polyline = [];
   wayPointLocation: any;
   sourceLocation: any;
+  inititalRoadPointLocation: any;
   // empty out previous values
   startLocation = [];
   endLocation = [];
@@ -62,73 +64,94 @@ export class AppComponent {
   styledMapType = new google.maps.StyledMapType(
     [
       {
-        'featureType': 'landscape.natural',
-        'elementType': 'geometry.fill',
-        'stylers': [
-          {
-            'visibility': 'on'
-          },
-          {
-            'color': '#e0efef'
-          }
-        ]
+          "featureType": "water",
+          "stylers": [
+              {
+                  "visibility": "on"
+              },
+              {
+                  "color": "#b5cbe4"
+              }
+          ]
       },
       {
-        'featureType': 'poi',
-        'elementType': 'geometry.fill',
-        'stylers': [
-          {
-            'visibility': 'on'
-          },
-          {
-            'hue': '#1900ff'
-          },
-          {
-            'color': '#c0e8e8'
-          }
-        ]
+          "featureType": "landscape",
+          "stylers": [
+              {
+                  "color": "#efefef"
+              }
+          ]
       },
       {
-        'featureType': 'road',
-        'elementType': 'geometry',
-        'stylers': [
-          {
-            'lightness': 100
-          },
-          {
-            'visibility': 'simplified'
-          }
-        ]
+          "featureType": "road.highway",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "color": "#83a5b0"
+              }
+          ]
       },
       {
-        'featureType': 'road',
-        'elementType': 'labels',
-        'stylers': [
-          {
-            'visibility': 'off'
-          }
-        ]
+          "featureType": "road.arterial",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "color": "#bdcdd3"
+              }
+          ]
       },
       {
-        'featureType': 'transit.line',
-        'elementType': 'geometry',
-        'stylers': [
-          {
-            'visibility': 'on'
-          },
-          {
-            'lightness': 700
-          }
-        ]
+          "featureType": "road.local",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "color": "#ffffff"
+              }
+          ]
       },
       {
-        'featureType': 'water',
-        'elementType': 'all',
-        'stylers': [
-          {
-            'color': '#7dcdcd'
-          }
-        ]
+          "featureType": "poi.park",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "color": "#e3eed3"
+              }
+          ]
+      },
+      {
+          "featureType": "administrative",
+          "stylers": [
+              {
+                  "visibility": "on"
+              },
+              {
+                  "lightness": 33
+              }
+          ]
+      },
+      {
+          "featureType": "road"
+      },
+      {
+          "featureType": "poi.park",
+          "elementType": "labels",
+          "stylers": [
+              {
+                  "visibility": "on"
+              },
+              {
+                  "lightness": 20
+              }
+          ]
+      },
+      {},
+      {
+          "featureType": "road",
+          "stylers": [
+              {
+                  "lightness": 20
+              }
+          ]
       }
     ],
     { name: 'Styled Map' });
@@ -173,10 +196,48 @@ export class AppComponent {
       this.styledMap();
       this.addMarker(mylocation, image);
       this.setMapOnAll(this.map);
-
       this.calculateAndDisplayMuliRoutes(mylocation);
-      this.watchLocation();
+
     });
+  }
+
+  initializeMap(location) {
+    this.map = new google.maps.Map(this.mapElement.nativeElement, {
+      zoom: 15,
+      center: location,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      rotateControl: true
+      // mapTypeControlOptions: {
+      //   mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
+      //     'styled_map']
+      // }
+    });
+  }
+
+  styledMap() {
+    // Associate the styled map with the MapTypeId and set it to display.
+    this.map.mapTypes.set('styled_map', this.styledMapType);
+    this.map.setMapTypeId('styled_map');
+  }
+
+  addMarker(location, image) {
+    const marker = new SlidingMarker({
+      position: location,
+      map: this.map,
+      title: 'i am title',
+      icon: image,
+      draggable: true
+    });
+    this.markers.push(marker);
+  }
+
+  setMapOnAll(map) {
+    for (let i = 0; i < this.markers.length; i++) {
+      this.markers[i].setMap(map);
+    }
+    // TODO: check if we need to show traffic layer
+    // const trafficLayer = new google.maps.TrafficLayer();
+    // trafficLayer.setMap(map);
   }
 
   calculateAndDisplayMuliRoutes(mylocation) {
@@ -194,24 +255,14 @@ export class AppComponent {
     directionsService.route({
       origin: mylocation,
       destination: this.destLocation,
-      // waypoints: wayPts,
+      // waypoints: wayPts,  // TODO: will be used when multi route options is set( providealternateroutes)
       travelMode: google.maps.TravelMode.DRIVING,
-      //provideRouteAlternatives: true,
-      drivingOptions: { // will work with premium licence
-        departureTime: new Date(Date.now()),  // for the time N milliseconds from now.
+      //provideRouteAlternatives: true, // TODO: will be used when multi route options is set
+      drivingOptions: { // TODO: will work with premium licence
+        departureTime: new Date(Date.now()),
         trafficModel: 'optimistic'
       }
     }, this.onDirectionSuccess.bind(this, directionsDisplay));
-
-    // directionsService.route({
-    //   origin: mylocation,
-    //   destination: this.destLocation,
-    //   travelMode: 'DRIVING',
-    //   drivingOptions: {
-    //     departureTime: new Date(Date.now()),  // for the time N milliseconds from now.
-    //     trafficModel: 'bestguess'
-    //   }
-    // }, this.onDirectionSuccess.bind(this, directionsDisplay));
   }
 
   reRoute() {
@@ -247,41 +298,33 @@ export class AppComponent {
 
   onDirectionSuccess(directionsDisplay, response, status) {
     let infowindow = new google.maps.InfoWindow();
-    google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
-      alert('sdfs')
-    })
+
     if (status === 'OK') {
-      let color = '#0000FF';
       response.routes.forEach((route, index) => {
-        if (index === 1) {
-          color = '#62666b';
-        } else if (index === 2) {
-          color = '#62666b';
-        }
-
-        this.polyline.push(new google.maps.Polyline({
-          path: [],
-          strokeColor: color,
-          strokeWeight: 5
-        }));
-      });
-      response.routes.forEach((route, index) => {
-        if (index !== 11) {
+        if (index === 0) {
           this.estimatedTravelTime = route.legs[0].duration.text;
-          let travelTime = this.estimatedTravelTime;
-
-          directionsDisplay.setDirections(response);
-
-
+          this.polyline.push(new google.maps.Polyline({
+            path: [],
+            strokeColor: '#7676f9',
+            strokeWeight: 7,
+            stokeOpacity: 1
+          }));
+          // directionsDisplay.setDirections(response);
 
           // if (this.polyline) {
           //   this.polyline.setMap(null);
           // }
-          // to get duraiton
-
           const bounds = new google.maps.LatLngBounds();
 
           const legs = route.legs;
+          this.inititalRoadPointLocation = legs[0].start_location;
+          console.log('roadpoint start location', legs[0].start_location.lat() + ',' + legs[0].start_location.lng());
+          var geocoder = new google.maps.Geocoder();
+          geocoder.geocode({'location': legs[0].start_location}, function(results, status) {
+            if (status === 'OK') {
+              console.log(results);
+            }
+          });
           for (let i = 0; i < legs.length; i++) {
             const steps = legs[i].steps;
             for (let j = 0; j < steps.length; j++) {
@@ -295,24 +338,16 @@ export class AppComponent {
 
           this.polyline[index].setMap(this.map);
 
-          google.maps.event.addListener(this.polyline[index], 'click', (function (poly, map) {
-            // poly.strokeColor = '#0000FF';
-            // poly.setMap(map);
-
+          google.maps.event.addListener(this.polyline[index], 'click', (function (poly, map, travelTime) {
             return function (event) {
-              //poly.setMap(map);
               infowindow.setContent(travelTime);
               infowindow.setPosition(event.latLng);
               infowindow.open(this.map);
-              poly.setOptions({ strokeColor: 'black' });
-
-              if (google.maps.geometry.poly.isLocationOnEdge(event.latLng, poly, 0.0001)) {
-                alert('in side');
-              }
-
+              // poly.setOptions({ strokeColor: 'black' }); // TODO: check if this is needed
             };
-          })(this.polyline[index], this.map));
+          })(this.polyline[index], this.map, this.estimatedTravelTime));
 
+          // TODO: try to show time betwen the middle of the route math
           // const startLoc = route.legs["0"].start_location;
           // const endLoc = route.legs["0"].end_location;
           // const inBetween = google.maps.geometry.spherical.interpolate(startLoc, endLoc, 0.5);
@@ -321,56 +356,48 @@ export class AppComponent {
           // infowindow.open(this.map);
         }
       });
-
+      this.watchLocation();
       // to get distance
       // response.routes[0].legs[0].distance.text
     } else {
+      // TODO: show a modal popup
       window.alert('Directions request failed due to ' + status);
     }
   }
 
-  initializeMap(location) {
-    this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      zoom: 15,
-      center: location,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      tilt: 45,
-      rotateControl: true
-      // mapTypeControlOptions: {
-      //   mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
-      //     'styled_map']
-      // }
-    });
-  }
-
-
-
-  styledMap() {
-    // Associate the styled map with the MapTypeId and set it to display.
-    this.map.mapTypes.set('styled_map', this.styledMapType);
-    this.map.setMapTypeId('styled_map');
-  }
-
-
   watchLocation() {
     this.geoLocation.watchLocation().subscribe((data) => {
       const updatelocation = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({'location': updatelocation}, function(results, status) {
+        if (status === 'OK') {
+          console.log(results);
+        }
+      });
+
       //if (google.maps.geometry.poly.isLocationOnEdge(updatelocation, this.polyline[0], 0.0001)) {
         console.log("in line");
         this.onWatchSuccess(data);
-      //} else {
+      //}
+      // else {
       //  this.wayPointLocation = updatelocation;
         //this.reRoute();
      // }
     });
   }
 
-
   onWatchSuccess(data) {
     // this.deleteMarkers();
     // this.updateGeolocation(this.uuid, data.coords.latitude, data.coords.longitude);
     const updatelocation = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
-
+    //17.5186458,78.39625290000004
+    // 17.4468897,78.3806721
+    let drivingStarted = false;
+    drivingStarted = this.getDistance(updatelocation, this.inititalRoadPointLocation) < 50;
+    if (drivingStarted && google.maps.geometry.poly.isLocationOnEdge(updatelocation, this.polyline[0], 0.001)) {
+      this.wayPointLocation = updatelocation;
+      this.reRoute();
+    }
 
     const lastPosn = this.markers[0].getPosition();
     console.log('lastPos', lastPosn.lat() + ',' + lastPosn.lng() );
@@ -415,34 +442,6 @@ export class AppComponent {
     }
   }
 
-  addMarker(location, image) {
-    const marker = new SlidingMarker({
-      position: location,
-      map: this.map,
-      title: 'i am title',
-      icon: image,
-      // icon: {
-      //   path: google.maps.SymbolPath.CIRCLE,
-      //   scale: 5,
-      // }
-    });
-    // let marker = new google.maps.Marker({
-    //   position: location,
-    //   map: this.map,
-    //   icon: image
-    // });
-    this.markers.push(marker);
-  }
-
-  setMapOnAll(map) {
-    for (let i = 0; i < this.markers.length; i++) {
-      this.markers[i].setMap(map);
-    }
-
-    const trafficLayer = new google.maps.TrafficLayer();
-    trafficLayer.setMap(map);
-  }
-
   clearMarkers() {
     this.setMapOnAll(null);
   }
@@ -451,6 +450,23 @@ export class AppComponent {
     this.clearMarkers();
     this.markers = [];
   }
+
+  rad(x) {
+    return x * Math.PI / 180;
+  };
+
+  //Get distance in meter
+  getDistance = function(p1, p2) {
+    var R = 6378137; // Earth’s mean radius in meter
+   var dLat = this.rad(p2.lat() - p1.lat());
+   var dLong = this.rad(p2.lng() - p1.lng());
+   var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+     Math.cos(this.rad(p1.lat())) * Math.cos(this.rad(p2.lat())) *
+     Math.sin(dLong / 2) * Math.sin(dLong / 2);
+   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+   var d = R * c;
+   return d; // returns the distance in meter
+ };
 
   updateGeolocation(uuid, lat, lng) {
     if (localStorage.getItem('mykey')) {
