@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-center sidebar">
+  <div class="p-2 nav-item">
+    <a class="nav-link active" [routerLink]="['formbuilder']" [routerLinkActive]="['active']">
+        <i class="fa fa-table" aria-hidden="true"></i>
+      <span class="d-none d-sm-none d-md-inline">formbuilder</span>
+      <span class="sr-only">(current)</span>
+    </a>
+  </div>
+  <div class="p-2 nav-item">
+    <a class="nav-link" [routerLink]="['scheduler']" [routerLinkActive]="['active']">
+      <i aria-hidden="true" class="fa fa-calendar"></i>
+      <span class="d-none d-sm-none d-md-inline">Schedule</span>
+    </a>
+  </div>
+  <div class="p-2 nav-item">
+    <a class="nav-link" [routerLink]="['maps']" [routerLinkActive]="['active']">
+      <i class="fa fa-map-marker" aria-hidden="true"></i>
+      <span class="d-none d-sm-none d-md-inline">Maps</span>
+    </a>
+  </div>
+  <div class="p-2 nav-item">
+    <a class="nav-link" [routerLink]="['messages']" [routerLinkActive]="['active']">
+      <i class="fa fa-commenting-o" aria-hidden="true"></i>
+      <span class="d-none d-sm-none d-md-inline">Messages</span>
+    </a>
+  </div>
+  <div class="p-2 nav-item">
+    <a class="nav-link" [routerLink]="['inventry']" [routerLinkActive]="['active']">
+      <i class="fa fa-truck" aria-hidden="true"></i>
+      <span class="d-none d-sm-none d-md-inline">Truck inventry</span>
+    </a>
+  </div>
+  <div class="p-2 nav-item">
+    <a class="nav-link" [routerLink]="['request']" [routerLinkActive]="['active']">
+      <i aria-hidden="true" class="fa fa-registered"></i>
+      <span class="d-none d-sm-none d-md-inline">My Request</span>
+    </a>
+  </div>
+  <div class="p-2 nav-item">
+    <a class="nav-link">
+      <i aria-hidden="true" class="fa fa-plus"></i>
+      <span class="d-none d-sm-none d-md-inline" (click)="openNewWorkOrderComponent()">New WorkOrder</span>
+    </a>
+  </div>
+</div>

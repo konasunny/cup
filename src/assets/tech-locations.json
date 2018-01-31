@@ -1,0 +1,20 @@
+[
+  {
+    "technicianId": "123",
+    "workOrderId": "WO123",
+    "position":
+      {
+        "latitude": 17.446877,
+        "longitude": 78.380641
+      }
+  },
+  {
+    "technicianId": "1231",
+    "workOrderId": "WO1231",
+    "position":
+      {
+        "latitude": 18.446877,
+        "longitude": 79.380641
+      }
+  }
+]

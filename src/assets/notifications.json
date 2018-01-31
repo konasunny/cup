@@ -1,0 +1,50 @@
+[
+  {
+    "notificationId": 123,
+    "notificationTypeId": 1,
+    "userId": 10001,
+    "userTypeId": 1,
+    "actionDate": null,
+    "message": "You left 3 items in your cart",
+    "active": true,
+    "acted": false,
+    "read": true,
+    "delivered": true
+  },
+  {
+    "notificationId": 125,
+    "notificationTypeId": 2,
+    "userId": 10001,
+    "userTypeId": 1,
+    "actionDate": null,
+    "message": "Please choose a timeslot to schedule a technician",
+    "active": true,
+    "acted": false,
+    "read": false,
+    "delivered": true
+  },
+  {
+    "notificationId": 130,
+    "notificationTypeId": 3,
+    "userId": 10001,
+    "userTypeId": 1,
+    "actionDate": 1515391567000,
+    "message": "Your Tech is Delayed by 1 hour. He will arrive by 3 pm today...",
+    "active": true,
+    "acted": false,
+    "read": true,
+    "delivered": true
+  },
+  {
+    "notificationId": 135,
+    "notificationTypeId": 7,
+    "userId": 10001,
+    "userTypeId": 1,
+    "actionDate": null,
+    "message": "Your Payment is pending",
+    "active": true,
+    "acted": false,
+    "read": false,
+    "delivered": true
+  }
+]

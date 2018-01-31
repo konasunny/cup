@@ -1,0 +1,72 @@
+@import '~sass/variables';
+
+.date-control {
+    background: transparent;
+    border: 0;
+    display: inline-block;
+    width: 120px;
+    color: $white;
+}
+.card {
+    .card-header {
+        background: #253c71;
+        color: $white;
+    }
+}
+.card-block {
+    padding: 0;
+}
+.card-weekdays {
+    list-style: none;
+}
+.card-weekdays li {
+    float: left;
+    width: 8rem;
+    padding: 0.7rem 0;
+}
+.tab-container .nav-item {
+    width: 7%;
+}
+.card-schedules {
+    background: $lightgrey;     
+}
+.card-tasklist {
+    width: 23%;
+    display: inline-block;
+    margin: 1rem;
+}
+
+.card-tasklist {
+    .card-header {
+        background: $card-header-light;
+        color: $blue;
+        font-weight: bold;
+        padding: 0.3rem 1rem;
+    }
+    .card-body{
+        text-align: left;
+    }
+}
+.card-weekdays li.active {
+    border-bottom: 2px solid $blue;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid $lightgrey;
+    background: $lightgrey;
+}
+.scheduletab {
+    background: $white !important;
+}
+.weather {
+    font-size: 1.5rem;
+}
+@media (min-width: 200px) and (max-width: 768px) {
+    .card-tasklist {
+        width: 95%;
+        margin: 0.5rem;
+    }
+    .weather {
+        font-size: 0.8rem;
+    }
+}

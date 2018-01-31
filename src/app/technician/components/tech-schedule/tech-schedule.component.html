@@ -1,0 +1,52 @@
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+                <span class="col-8 align-self-start">
+                        Schedule for Week
+                        <input type="text"
+                        class="date-control"
+                        [minDate]="minDate"
+                        [maxDate]="maxDate"
+                        #dp="bsDatepicker"
+                        bsDatepicker [(bsValue)]="bsValue">
+                </span>
+                <span class="col-3 align-self-end weather text-right"><i class="fa fa-cloud" aria-hidden="true"></i> 
+                    {{weather.query.results.channel.item.condition.temp}} °C is {{weather.query.results.channel.item.condition.text}}</span>
+        </div>        
+    </div>
+    <div class="card-block">
+        <!-- <div class="card-list">
+            <ul class="card-weekdays text-center">
+                <li class="active">Sunday</li>
+                <li>Monday</li>
+                <li>Tuesday</li>
+                <li>Wednesday</li>
+                <li>Thursday</li>
+                <li>Friday</li>
+                <li>Saturday</li>
+                <li>Sunday</li>
+                <li>Monday</li>
+                <li>Tuesday</li>
+                <li>Wednesday</li>
+                <li>Thursday</li>
+                <li>Friday</li>
+                <li>Saturday</li>
+            </ul>
+        </div> -->
+        <div class="card-schedules">
+            <tabset #scheduleTabs>
+                <tab *ngFor="let tabz of tabs" [heading]="tabz.title" (select)="tabz.active = true" class="scheduletab">
+                    <div class="card text-center card-tasklist" *ngFor="let tabcontent of tabz.content">
+                        <div class="card-header">{{tabcontent?.contenttime}}</div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <i class="fa fa-ship" aria-hidden="true"></i> {{tabcontent?.contenttitle}}.</p>
+                            <p class="card-text">
+                                <i class="fa fa-street-view" aria-hidden="true"></i> {{tabcontent?.contentaddress}}.</p>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>

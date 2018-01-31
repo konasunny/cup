@@ -1,0 +1,20 @@
+.formsection {
+    margin: 15px auto; 
+    width: 80%;
+}
+iframe {
+    border: 0px none; 
+    // margin: -100px auto 0; 
+    height: 859px; 
+    width: 100%;
+}
+@media (min-width: 200px) and (max-width: 768px) {
+    .formsection {
+        width: 100%;
+        overflow: scroll;
+    }
+}
+
+iframe #uvTabLabel {
+    display: none;
+}

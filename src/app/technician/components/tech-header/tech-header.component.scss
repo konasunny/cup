@@ -1,0 +1,109 @@
+@import '~sass/variables';
+
+:host {
+    padding: 0;
+    display: block;
+}
+.navbar-toggler {
+    border: 0;
+}
+.right-section{
+    float: right;
+    height: 60px;
+    .btn-group {
+        border-left: 1px solid #ddd;
+        font-size: 1.5rem;
+        padding: 0.6rem 0.8rem;
+    }
+    .btn-group:first-child {
+        border-left: 0 solid #ddd;
+    }
+    .btn-group i {
+        font-size: 1.5rem;
+    }
+    .dropdown-menu.show {
+        left: auto !important;
+        right: 0 !important;
+    }
+}
+
+nav {
+    border-bottom: 1px solid #ddd;
+    padding: 0 0.5em;
+}
+
+.navbar-logo {
+    width: 6rem;
+}
+
+.navbar {
+    .collapse {
+        display: none;
+    }
+}
+
+.d-lg-block {
+    display: none !important;
+}
+@media (min-width: 992px) {
+    .d-lg-block {
+        display: inline-block !important;
+    }
+}
+
+@media (min-width: 200px) and (max-width: 768px) {
+    .nav-item[_ngcontent-c2] {
+        font-size: 0.9rem;
+    }
+    .navbar-toggler {
+        padding: 0.25rem 0.75rem;
+        font-size: 0.9rem;
+    }
+    .right-section{
+        float: right;
+        height: 60px;
+        .btn-group {
+            font-size: 0.8rem;
+            padding: 1.5rem 0.5rem;
+        }
+        .btn-group i {
+            font-size: 0.9rem;
+        }
+        .dropdown-menu.show {
+            left: auto !important;
+            right: 0 !important;
+        }
+    }
+}
+
+.input-group-addon {
+    padding: .5rem .75rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #495057;
+    text-align: center;
+    background-color: #e9ecef;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+}
+.input-group {
+    .form-control {
+        height: 35px;
+    }
+
+}
+.badge-notify {
+    background: $red;
+    position: relative;
+    top: -5px;
+    left: -10px;
+    width: 15px;
+    height: 15px;
+    font-size: 10px;
+    padding: 3px;
+    border-radius: 50px;
+    color: $white;
+    padding: 0;
+}

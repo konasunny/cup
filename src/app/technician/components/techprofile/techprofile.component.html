@@ -1,0 +1,142 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{title}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row justify-content-center">
+    <div class="col-3">
+      <i class="fa fa-user-circle" aria-hidden="true" style="font-size: 6rem;"></i>
+      <!-- <img src="cinqueterre.jpg" class="rounded" alt="Cinque Terre"> -->
+    </div>
+  </div>
+  <hr/>
+  <form novalidate [formGroup]="myform" (ngSubmit)="onSubmit()">
+    <fieldset formGroupName="name">
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group" [ngClass]="{
+                      'has-danger': firstName.invalid && (firstName.dirty || firstName.touched),
+                      'has-success': firstName.valid && (firstName.dirty || firstName.touched)
+                    }">
+            <label>First Name</label>
+            <input type="text" class="form-control" formControlName="firstName" required>
+            <div class="form-control-feedback" *ngIf="firstName.errors && (firstName.dirty || firstName.touched)">
+              <p class="text-danger" *ngIf="firstName.errors.required">Last Name is required</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group" [ngClass]="{
+                      'has-danger': lastName.invalid && (lastName.dirty || lastName.touched),
+                      'has-success': lastName.valid && (lastName.dirty || lastName.touched)
+                    }">
+            <label>Last Name</label>
+            <input type="text" class="form-control" formControlName="lastName" required>
+            <div class="form-control-feedback" *ngIf="lastName.errors && (lastName.dirty || lastName.touched)">
+              <p class="text-danger" *ngIf="lastName.errors.required">Last Name is required</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+
+    <div class="form-group" [ngClass]="{
+              'has-danger': email.invalid && (email.dirty || email.touched),
+              'has-success': email.valid && (email.dirty || email.touched)
+         }">
+      <label>Email</label>
+      <input type="email" class="form-control" formControlName="email" required>
+      <div class="form-control-feedback" *ngIf="email.errors && (email.dirty || email.touched)">
+        <p class="text-danger" *ngIf="email.errors.required">Email is required</p>
+        <p class="text-danger" *ngIf="email.errors.pattern">The email address must contain at least the @ character and . character</p>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group" [ngClass]="{
+                      'has-danger': phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched),
+                      'has-success': phoneNumber.valid && (phoneNumber.dirty || phoneNumber.touched)
+                    }">
+          <label>Phone Number</label>
+          <input type="text" class="form-control" formControlName="phoneNumber" required>
+          <div class="form-control-feedback" *ngIf="phoneNumber.errors && (phoneNumber.dirty || phoneNumber.touched)">
+            <p class="text-danger" *ngIf="phoneNumber.errors.required">Phone Number is required</p>
+            <p class="text-danger" *ngIf="phoneNumber.errors.minlength">Phone Number must be 10 characters long, we need another {{phoneNumber.errors.minlength.requiredLength - phoneNumber.errors.minlength.actualLength}}
+              characters </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group" [ngClass]="{
+                      'has-danger': drivingLicense.invalid && (drivingLicense.dirty || drivingLicense.touched),
+                      'has-success': drivingLicense.valid && (drivingLicense.dirty || drivingLicense.touched)
+                    }">
+          <label>Driving License</label>
+          <input type="text" class="form-control" formControlName="drivingLicense" required>
+          <div class="form-control-feedback" *ngIf="drivingLicense.errors && (drivingLicense.dirty || drivingLicense.touched)">
+            <p class="text-danger" *ngIf="drivingLicense.errors.required">Driving License is required</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h5>Address</h5>
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group" [ngClass]="{
+                        'has-danger': streetOne.invalid && (streetOne.dirty || streetOne.touched),
+                        'has-success': streetOne.valid && (streetOne.dirty || streetOne.touched)
+                      }">
+          <label>Street1</label>
+          <input type="text" class="form-control" formControlName="streetOne" required>
+          <div class="form-control-feedback" *ngIf="streetOne.errors && (streetOne.dirty || streetOne.touched)">
+            <p class="text-danger" *ngIf="streetOne.errors.required">Street1 is required</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group" [ngClass]="{
+                        'has-danger': drivingLicense.invalid && (drivingLicense.dirty || drivingLicense.touched),
+                        'has-success': drivingLicense.valid && (drivingLicense.dirty || drivingLicense.touched)
+                      }">
+          <label>Street2</label>
+          <input type="text" class="form-control" formControlName="streetTwo" required>
+          <div class="form-control-feedback" *ngIf="streetTwo.errors && (streetTwo.dirty || streetTwo.touched)">
+            <p class="text-danger" *ngIf="streetTwo.errors.required">Street2 is required</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group" [ngClass]="{
+              'has-danger': technicianskill.invalid && (technicianskill.dirty || technicianskill.touched),
+              'has-success': technicianskill.valid && (technicianskill.dirty || technicianskill.touched)
+            }">
+      <label>Technical Skills</label>
+      <select class="form-control" formControlName="technicianskill" multiple>
+        <option *ngFor="let technicianskill of technicianskills" [value]="technicianskill">{{technicianskill}}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Technical Skills2</label>
+      <input type="text" class="form-control" formControlName="state" required (change)="changed($event)"
+            [typeahead]="states" [typeaheadOptionsLimit]="7" [typeaheadMinLength]="0" placeholder="Typeahead inside a form">
+    </div>
+    
+
+    <button type="submit" class="btn btn-primary" ng-disabled="!myform.valid">{{submitBtnName}}</button>
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{closeBtnName}}</button>
+
+  </form>
+
+</div>
+<!-- <div class="modal-footer">
+  <pre>{{myform.value | json}}</pre>
+</div> -->

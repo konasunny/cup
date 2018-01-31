@@ -1,0 +1,53 @@
+@import '~sass/variables';
+@import '~sass/mixins';
+
+:host {
+  background: $blue;
+  display: block;
+  padding: 2rem 0 0;
+
+  .row {
+    margin: 0;
+  }
+  
+}
+
+.block {
+  text-align: center;
+  vertical-align: middle;
+  padding: 0 2rem;
+}
+
+.circle {
+  border: 0.3rem solid #fff;
+  border-radius: 9rem;
+  color: $white;
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: bold;
+  height: 9rem;
+  padding: 3rem 1rem 0;
+  vertical-align: middle;
+  width: 9rem;
+  margin: 1rem 0;
+}
+
+.circle-text {
+  color: $white;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+@media (min-width: 200px) and (max-width: 768px) {
+  .circle {
+    font-size: 1.2rem;
+    height: 6rem;
+    padding: 2rem 1rem 0;
+    width: 6rem;
+    margin-bottom: 1rem;
+  }
+  .circle-text {
+    font-size: 1rem;
+  }
+}
+ 

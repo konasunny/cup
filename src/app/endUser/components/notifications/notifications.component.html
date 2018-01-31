@@ -1,0 +1,11 @@
+<div class="card border-secondary">    
+    <div class="list-group">
+        <a class="list-group-item" *ngFor="let noti of NotificationsList">
+            <i class="fa fa-comment fa-fw"></i>{{noti.message}}
+            <span class="pull-right text-muted small">
+                <em>4 minutes ago</em>
+            </span>
+        </a>
+    </div>   
+</div>
+<!-- /.panel -->

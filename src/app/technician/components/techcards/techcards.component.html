@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col block">
+    <p class="circle" (click)="openModalWithComponent()">5/7</p>
+    <p class="circle-text" [routerLink]="['Workorders']" [routerLinkActive]="['active']">TODAYS WORK ORDERS</p>
+  </div>
+  <div class="col block">
+    <p class="circle" (click)="openModalWithComponent()">6/10</p>
+    <p class="circle-text" [routerLink]="['todo']" [routerLinkActive]="['active']">TODO</p>
+  </div>
+  <div class="col block">    
+    <p class="circle" (click)="openModalWithComponent()">$ 230</p>
+    <p class="circle-text" [routerLink]="['todo']" [routerLinkActive]="['active']">MY EARNINGS</p>
+  </div>
+  <div class="col block">    
+      <p class="circle" (click)="openModalWithComponent()">7/9</p>
+      <p class="circle-text" [routerLink]="['todo']" [routerLinkActive]="['active']">ALERTS</p>
+    </div>
+</div>

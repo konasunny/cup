@@ -1,0 +1,20 @@
+@import '~sass/variables';
+
+:host {
+  display: block;
+  padding: 0;
+}
+
+.sidebar {
+  background-color: $grey;
+
+  .nav-item {
+    color: $white;
+
+    .nav-link.active {
+      color: $yellow-orange;
+    }
+
+  } 
+
+}

@@ -1,0 +1,16 @@
+@import '~sass/variables';
+
+.card-deck {
+    margin-bottom: 30px;
+ }
+ .card-text {
+    font-size: $card-fontsize;
+ }
+
+//  .card {
+//     h4, .card-text {
+//         @include respond-to(handhelds) { font-size:$font-sm; }
+//         @include respond-to(medium-screens) { font-size:$font-md;  }
+//         @include respond-to(wide-screens) { font-size:$font-lg;  }      
+//     }
+//  }
