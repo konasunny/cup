@@ -58,6 +58,7 @@ export class MapsTechViewComponent extends MapsGenericComponent implements OnIni
 
   onDirectionSuccess(directionsDisplay, response, status) {
     directionsDisplay.setDirections(response);
+    this.watchLocation();
   }
 
   watchLocation() {
