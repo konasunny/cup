@@ -1,0 +1,165 @@
+@import '~sass/variables';
+
+@media (min-width: 768px) {
+  .row-sm-offset-3 div:first-child[class*='col-'] {
+    margin-left: 25%;
+  }
+} 
+
+.login {
+  .socialbuttons {    
+    a {
+      color: $white;
+      opacity: 0.9;
+    }
+    
+    a:hover {
+      color: $white;
+      opacity: 1;   	
+    }
+  }  
+
+  .loginform .input-group.i {
+    width: 2em;
+  }
+} 
+
+.btn-primary {  
+  background-color: $btn-primary-clr;
+  border-color: $btn-primary-clr;
+  color: $white;  
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.alert {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .login {
+    background: $white;	
+    border-radius: 2px;
+    box-shadow: 0px 2px 3px 2px $login-box-shadow;
+    margin: 16px;
+    padding: 20px;
+    -moz-border-radius: 2px;
+    -moz-box-shadow: 0px 2px 3px 2px $login-box-shadow;
+    -webkit-border-radius: 2px;       
+    -webkit-box-shadow: 0px 2px 3px 2px $login-box-shadow; 
+                        
+    .cup_forgotPwd {
+      margin-top: 10px;
+      text-align: right;          
+    }	
+  }	 
+
+  .rembr{	
+    padding-left: 2.5em;	
+  }	 
+}
+@media (max-width :767px) {	
+  .rembr{	
+    padding-left: 2.5em;
+    top: -10px;	
+  }
+}
+/*=========================
+Icons
+================= */
+
+/* footer social icons */
+ul.social-network { 
+  display: inline;
+  list-style: none;
+  margin-left: 0;
+  padding: 0;
+
+  li {
+    display: inline;
+    margin: 0 5px;
+  }
+}
+/* footer social icons */
+.social-network {
+  a.icoGoogle:hover {
+    background-color:$google-icon-color;
+  }
+
+  a.icoTwitter:hover {
+    background-color:$twitter-icon-color;
+  }
+
+  a.icoFacebook:hover {
+    background-color:$facebook-icon-color;
+  }
+
+  a.icoFacebook:hover i,   
+  a.icoTwitter:hover i,
+  a.icoGoogle:hover i {
+      color:$white;
+  }
+}
+
+.social-circle li a:hover i,.triggeredHover {
+  transition: all 0.2s;
+  transform: rotate(360deg);    
+  -ms--transform: rotate(360deg);
+  -ms-transition: all 0.2s;       
+  -o-transition: all 0.2s;    
+  -moz-transition: all 0.2s;      
+  -moz-transform: rotate(360deg); 
+  -webkit-transition: all 0.2s;
+  -webkit-transform: rotate(360deg);     
+}
+
+.social-circle  {
+  height: 50px;
+  width: 50px;
+
+  i {
+    color: $white;      
+    -moz-transition: all 0.8s;
+    -ms-transition: all 0.8s;
+    -o-transition: all 0.8s;     
+    transition: all 0.8s;
+    -webkit-transition: all 0.8s;
+  } 
+  
+  .icoGoogle{
+    background: $google-icon-color;
+  }
+
+  .icoFacebook{
+    background: $facebook-icon-color;
+  }
+
+  .icoTwitter {
+      background: $twitter-icon-color;
+  }
+  
+  li{
+      a {        
+        border-radius: 50%;
+        display: inline-block;                
+        font-size: 20px;
+        height: 50px;
+        margin:0 auto 0 auto;
+        position: relative;          
+        width: 50px;
+        -moz-border-radius: 50%;
+        -webkit-border-radius:50%;
+      }
+    i {         
+        line-height: 50px;
+        margin: 0;
+    }
+  }  
+}
+.head-cls{    
+  color:#018bc6;    
+}

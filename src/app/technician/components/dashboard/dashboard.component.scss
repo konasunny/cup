@@ -1,0 +1,20 @@
+@import '~sass/variables';
+
+:host {
+  padding: 0;
+  display: block;
+}
+.tech-dashboard {
+  margin-bottom: 70px;
+}
+.card-deck {
+  margin-bottom: 30px;
+}
+
+.m-sidebar {
+  bottom: 0;
+  height: 50px;
+  margin-top: 10px;
+  padding: 0;  
+  position: fixed;  
+}

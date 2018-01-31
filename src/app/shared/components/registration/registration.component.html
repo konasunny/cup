@@ -1,3 +1,233 @@
-<p>
-  registration works!
-</p>
+<div class="container">
+  <div class="text-center" style="margin-top:20px;">
+    <img src="assets/shared/logo.png" alt="logo" />
+  </div>
+  <div class="registration">
+    <div class="offset-lg-2 col-lg-8 col-sm-8 col-12  main-section">
+      <div class="clearfix">&nbsp;</div>
+      <form class="container" id="needs-validation" novalidate>
+        <div class="row">
+          <div class="col-sm-12 col-12">
+            <div class="form-group">
+              <label class="text-inverse per-info" for="inputEmail4">Email</label>
+              <small class="text-muted">Used to sign in to your account</small>
+              <input type="email" class="form-control" id="inputEmail4" placeholder="Email Address or User Name" required>
+              <div class="invalid-feedback">
+                Please provide a valid Email.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-12">
+            <label for="password" class="text-inverse per-info">Password</label>
+            <small class="text-muted">
+              Must be at least 8 characters long and contain at least 1 number and 1 uppercase letter.
+            </small>
+          </div>
+          <div class="col-sm-6 col-6">
+            <div class="form-group">
+              <input type="password" class="form-control" id="inputpassword" placeholder="password" required>
+              <div class="invalid-feedback">
+                Please provide a valid password.
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-6">
+            <div class="form-group">
+              <input type="password" class="form-control" id="confirmpassword" placeholder="Confirm password" required>
+              <div class="invalid-feedback">
+                Please provide a valid password.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-12">
+            <label for="personal-info" class="per-info">
+              <h5>Personal Information</h5>
+            </label>
+          </div>
+          <div class="col-lg-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label class="text-inverse" for="validationCustom01">First Name</label>
+              <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="First Name" required>
+            </div>
+          </div>
+          <div class="col-lg-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label class="text-inverse" for="validationCustom02">Last Name</label>
+              <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Last Name" required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label> Date Of Birth</label>
+            <select class="custom-select d-block form-control" id="image" required>
+              <option value="">YYYY</option>
+              <option value="1">1987</option>
+              <option value="2">1988</option>
+              <option value="1">1989</option>
+              <option value="2">1990</option>
+              <option value="2">1991</option>
+              <option value="2">1992</option>
+              <option value="2">1993</option>
+              <option value="2">1994</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-3">
+            <label class="text-inverse" for="select-menu">&nbsp;</label>
+            <select class="custom-select d-block form-control" id="image" required>
+              <option value="">MM</option>
+              <option value="1">Jan</option>
+              <option value="2">Feb</option>
+              <option value="1">Mar</option>
+              <option value="2">Apr</option>
+              <option value="2">May</option>
+              <option value="2">Jun</option>
+              <option value="2">Jul</option>
+              <option value="2">Aug</option>
+              <option value="2">Sep</option>
+              <option value="2">Oct</option>
+              <option value="2">Nov</option>
+              <option value="2">Dec</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-3">
+            <label class="text-inverse" for="select-menu">&nbsp;</label>
+            <select class="custom-select d-block form-control" id="image" required>
+              <option value="">DD</option>
+              <option value="1">01</option>
+              <option value="2">02</option>
+              <option value="1">03</option>
+              <option value="2">04</option>
+              <option value="2">05</option>
+              <option value="2">06</option>
+              <option value="2">07</option>
+              <option value="2">08</option>
+              <option value="2">09</option>
+              <option value="2">10</option>
+              <option value="2">11</option>
+              <option value="2">12</option>
+              <option value="1">13</option>
+              <option value="2">14</option>
+              <option value="2">15</option>
+              <option value="2">16</option>
+              <option value="2">17</option>
+              <option value="2">18</option>
+              <option value="2">19</option>
+              <option value="2">20</option>
+              <option value="1">21</option>
+              <option value="2">22</option>
+              <option value="1">23</option>
+              <option value="2">24</option>
+              <option value="2">25</option>
+              <option value="2">26</option>
+              <option value="2">27</option>
+              <option value="2">28</option>
+              <option value="2">29</option>
+              <option value="2">30</option>
+              <option value="2">31</option>
+            </select>
+          </div>
+          <div class="col-sm-3 form-group">
+            <label class="text-inverse" for="select-menu">Gender</label>
+            <select class="custom-select d-block form-control" id="image" required>
+              <option value="">Select</option>
+              <option value="1">Female</option>
+              <option value="2">Male</option>
+            </select>
+            <div class="invalid-feedback">
+              Please selected any option.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-12">
+            <div class="form-group">
+              <label class="text-inverse" for="inputEmail4">Address</label>
+              <input type="email" class="form-control" id="inputEmail4" placeholder="Street Address" required>
+              <div class="invalid-feedback">
+                Please provide a valid Email.
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" id="inputEmail4" placeholder="Street Address (Optional)" required>
+              <div class="invalid-feedback">
+                Please provide a valid Email.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label class="text-inverse" for="select-menu">Country</label>
+              <select class="custom-select d-block form-control" id="image" required>
+                <option value="">select country</option>
+                <option value="1">India</option>
+                <option value="2">Iceland</option>
+                <option value="3">Ireland</option>
+              </select>
+              <div class="invalid-feedback">
+                Please selected any option.
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label class="text-inverse" for="select-menu">Region/State/Province</label>
+              <select class="custom-select d-block form-control" id="image" required>
+                <option value="">Region/State/Province</option>
+                <option value="1">Andhra Pradhesh</option>
+                <option value="2">Assam</option>
+                <option value="3">Telangana</option>
+              </select>
+              <div class="invalid-feedback">
+                Please selected any option.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label class="text-inverse" for="validationCustom03">City</label>
+              <input type="text" class="form-control" id="validationCustom03" placeholder="City" required>
+              <div class="invalid-feedback">
+                Please provide a valid city.
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label class="text-inverse" for="validationCustom03">Postcode</label>
+              <input type="text" class="form-control" id="validationCustom03" placeholder="Postcode" required>
+              <div class="invalid-feedback">
+                Please provide a valid city.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label for="terms">I agree with the
+            <a href="#/termsandconditions" title="You may read our terms and conditions by clicking on this link">terms and conditions</a> for Registration.</label>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-lg-12 col-sm-12 col-12 text-center">
+            <button class="btn btn-primary" type="submit">Sign Up</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <p class="change_link">
+            Alredy a member ?
+            <a href="#/login" class="to_register">Sign In</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

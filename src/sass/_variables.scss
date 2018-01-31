@@ -1,3 +1,44 @@
 // Font Awesome
 $fa-font-path: '../../node_modules/font-awesome/fonts';
-$red: red;
+
+$black          : #000;
+$grey           : #878787;
+$regent-st-blue : #add8e6;
+$river-bed      : #48525c;
+$yellow-orange  : #ffa949;
+$text-white : white;
+$card-fontsize : 20px;
+$white :#fff;
+$red: rgb(221, 52, 14);
+$btn-primary-clr :#00D092;
+$login-box-shadow :rgba(0,0,0,0.2);
+$google-icon-color :#BD3518;
+$twitter-icon-color :#33ccff;
+$facebook-icon-color:#3B5998;
+$lightgrey: #c1b8b8;
+$blue: #3B5998;
+
+$break-small: 320px;
+$break-medium: 998px;
+$break-large: 1024px;
+
+// font sizes for screen
+$font-xs: 12px;
+$font-sm: 14px;
+$font-md: 16px;
+$font-lg: 18px;
+
+
+// Functional color variables
+$card-header-light : lighten($regent-st-blue, 15%);
+$color-border-dark  : $yellow-orange;
+$color-shadow       : rgba($black,.8);
+
+
+
+
+
+
+
+
+

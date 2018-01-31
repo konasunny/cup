@@ -1,5 +1,12 @@
 @import 'variables';
+@import 'mixins';
 
 // 3rd Party Libraries
+// @import '../../node_modules/font-awesome/scss/font-awesome';
+// @import '../../node_modules/bootstrap/scss/bootstrap.scss';
+// @import '../../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+
 @import '../../node_modules/font-awesome/scss/font-awesome';
-@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@import "bootswatch-paper.scss";
+@import '../../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+@import '../../node_modules/animate.css/animate.css';
