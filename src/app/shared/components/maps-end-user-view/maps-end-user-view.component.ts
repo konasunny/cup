@@ -203,16 +203,7 @@ export class MapsEndUserViewComponent extends MapsGenericComponent implements On
     //   }
     // }
 
-    // updateGeolocation(techId, lat, lng) {
-    //   const newData = this.ref.push();
-    //   newData.set({
-    //     uuid: techId,
-    //     latitude: lat,
-    //     longitude: lng
-    //   });
-    //   localStorage.setItem('mykey', newData.key);
 
-    // }
 
   onLocationError(error: any) {
     this.mapElement.nativeElement.innerHTML = this.onGeoLocationError(error);

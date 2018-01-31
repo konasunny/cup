@@ -23,6 +23,8 @@ import { TechTodoComponent } from './components/tech-todo/tech-todo.component';
 import { FormbuilderComponent } from './components/formbuilder/formbuilder.component';
 import { WorkordersComponent } from './components/workorders/workorders.component';
 import { NewworkorderComponent } from './components/newworkorder/newworkorder.component';
+import { environment } from '../../environments/environment';
+import { AngularFireModule } from 'angularfire2';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { NewworkorderComponent } from './components/newworkorder/newworkorder.co
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
-    TypeaheadModule.forRoot()
+    TypeaheadModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase),
   ],
   declarations: [
     DashboardComponent,

@@ -40,7 +40,7 @@ import { MapsTechViewComponent } from './components/maps-tech-view/maps-tech-vie
     GeolocationService,
     TechniciansLocationService
   ],
-  exports: [MapsEndUserViewComponent],
+  exports: [MapsEndUserViewComponent, MapsTechViewComponent],
   entryComponents: [ModalcontentComponent, ConfirmationmodalComponent]
 })
 export class SharedModule { }

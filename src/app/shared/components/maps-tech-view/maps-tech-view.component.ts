@@ -3,10 +3,11 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MapsGenericComponent } from '../maps-generic/maps-generic.component';
 
 import { GeolocationService } from '../../services/geo-location.service';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 declare var google: any;
 declare var SlidingMarker: any;
-
+import * as firebase from 'firebase';
 @Component({
   selector: 'cupcake-maps-tech-view',
   templateUrl: './maps-tech-view.component.html',
@@ -14,8 +15,10 @@ declare var SlidingMarker: any;
 })
 export class MapsTechViewComponent extends MapsGenericComponent implements OnInit {
   @ViewChild('map') mapElement: ElementRef;
-  destLocation = 'begumpet, hyderabad';; // TODO: will get from service
+  destLocation = 'begumpet, hyderabad'; // TODO: will get from service
 
+  ref = firebase.database().ref('geolocations/');
+  selectedTechnician = '123';
   constructor(protected geoLocation: GeolocationService) {
     super(geoLocation);
   }
@@ -32,6 +35,7 @@ export class MapsTechViewComponent extends MapsGenericComponent implements OnIni
         this.styledMap();
         this.addMarker(currentLocation);
         this.calculateAndDisplayRoute(currentLocation);
+        this.updateGeolocation(this.selectedTechnician, data.coords.latitude, data.coords.longitude);
       },
       (error) => {
         this.mapElement.nativeElement.innerHTML = this.onGeoLocationError(error);
@@ -54,5 +58,27 @@ export class MapsTechViewComponent extends MapsGenericComponent implements OnIni
 
   onDirectionSuccess(directionsDisplay, response, status) {
     directionsDisplay.setDirections(response);
+  }
+
+  watchLocation() {
+    this.geoLocation.watchLocation().subscribe(
+      (data) => {
+        this.updateGeolocation(this.selectedTechnician, data.coords.latitude, data.coords.longitude);
+      },
+      (error) => {
+        this.mapElement.nativeElement.innerHTML = this.onGeoLocationError(error);
+      }
+    );
+  }
+
+  updateGeolocation(techId, lat, lng) {
+    const newData = this.ref.push();
+    newData.set({
+      uuid: techId,
+      latitude: lat,
+      longitude: lng
+    });
+    localStorage.setItem('mykey', newData.key);
+
   }
 }
