@@ -18,7 +18,7 @@ export class MapsTechViewComponent extends MapsGenericComponent implements OnIni
   destLocation = 'begumpet, hyderabad'; // TODO: will get from service
 
   ref = firebase.database().ref('geolocations/');
-  selectedTechnician = '123';
+  selectedTechnician = '124';
   constructor(protected geoLocation: GeolocationService) {
     super(geoLocation);
   }
